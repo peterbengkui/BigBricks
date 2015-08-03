@@ -1,0 +1,38 @@
+
+
+<div id="main" data-lift="surround?with=default;at=content">
+    <a href='/template/add'>Create a template</a>
+
+
+    <table  class='table-striped'
+            id="example" width="100%">
+        <thead>
+        <tr>					<th>Template name</th>
+            <th>Git branch</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-lift="lift:TemplateRender.templates">
+
+
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div data-lift="lift:TemplateRender.paginate">
+        <nav:first></nav:first>
+        |
+        <nav:prev></nav:prev>
+        | |
+        <nav:next></nav:next>
+        |
+        <nav:last></nav:last>
+        |
+        <nav:records></nav:records>
+    </div>
+
+
+</div>

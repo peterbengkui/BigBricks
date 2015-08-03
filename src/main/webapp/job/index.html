@@ -1,0 +1,38 @@
+
+
+<div id="main" data-lift="surround?with=default;at=content">
+    <a href='/job/add'>Add a User</a>
+
+
+    <table  class='table-striped'
+            id="example" width="100%">
+        <thead>
+        <tr>					<th>Project ID</th>
+            <th>Template ID</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-lift="lift:JobRender.jobs">
+
+
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div data-lift="lift:JobRender.paginate">
+        <nav:first></nav:first>
+        |
+        <nav:prev></nav:prev>
+        | |
+        <nav:next></nav:next>
+        |
+        <nav:last></nav:last>
+        |
+        <nav:records></nav:records>
+    </div>
+
+
+</div>

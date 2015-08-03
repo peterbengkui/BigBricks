@@ -1,0 +1,38 @@
+
+
+<div id="main" data-lift="surround?with=default;at=content">
+    <a href='/project/add'>Create a project</a>
+
+
+    <table  class='table-striped'
+            id="example" width="100%">
+        <thead>
+        <tr>					<th>Project name</th>
+            <th>Git branch</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-lift="lift:ProjectRender.projects">
+
+
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div data-lift="lift:ProjectRender.paginate">
+        <nav:first></nav:first>
+        |
+        <nav:prev></nav:prev>
+        | |
+        <nav:next></nav:next>
+        |
+        <nav:last></nav:last>
+        |
+        <nav:records></nav:records>
+    </div>
+
+
+</div>
