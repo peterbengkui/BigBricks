@@ -32,10 +32,10 @@ class TemplateRender extends PaginatorSnippet[Template] {
 
       <td>{u.templateName.get}</td>
       <td>
-        {link("/template/edit", () => selectedTemplate(Full(u)), Text("Edit"))}
+        {link("/components/template/edit", () => selectedTemplate(Full(u)), Text("Edit"))}
       </td>
       <td>
-        {link("/template/delete", () => selectedTemplate(Full(u)), Text("Delete"))}
+        {link("/components/template/delete", () => selectedTemplate(Full(u)), Text("Delete"))}
       </td>
     </tr> )
 
@@ -49,7 +49,7 @@ class TemplateRender extends PaginatorSnippet[Template] {
         def deleteTemplate() {
           notice("Template " + (template.templateName ) + " deleted")
           template.delete_!
-          redirectTo("/template/index.html")
+          redirectTo("/components/template/index.html")
         }
 
         // bind the incoming XHTML to a "delete" button.
@@ -62,14 +62,14 @@ class TemplateRender extends PaginatorSnippet[Template] {
         // if the was no ID or the template couldn't be found,
         // display an error and redirect
       }) openOr {
-      error("Template not found"); redirectTo("/template/index.html")
+      error("Template not found"); redirectTo("/components/template/index.html")
     }
   }
   // called when the form is submitted
   private def saveTemplate(template: Template) = template.validate match {
     // no validation errors, save the template, and go
     // back to the "list" page
-    case Nil => template.save; redirectTo("/template/index.html")
+    case Nil => template.save; redirectTo("/components/template/index.html")
 
     // oops... validation errors
     // display the errors and make sure our selected template is still the same
@@ -79,7 +79,7 @@ class TemplateRender extends PaginatorSnippet[Template] {
   def add(xhtml: Group): NodeSeq =
     selectedTemplate.is.openOr(new Template).toForm(Empty, saveTemplate _) ++ <tr>
       <td>
-        <a href="/template/index.html">Cancel</a>
+        <a href="/components/template/index.html">Cancel</a>
       </td>
       <td>
         <input type="submit" value="Create"/>
@@ -102,7 +102,7 @@ class TemplateRender extends PaginatorSnippet[Template] {
       // call.
       toForm(Empty, saveTemplate _) ++ <tr>
       <td>
-        <a href="/template/index.html">Cancel</a>
+        <a href="/components/template/index.html">Cancel</a>
       </td>
       <td>
         <input type="submit" value="Save"/>
@@ -111,7 +111,7 @@ class TemplateRender extends PaginatorSnippet[Template] {
 
       // bail out if the ID is not supplied or the template's not found
     ) openOr {
-      error("Template not found"); redirectTo("/template/index.html")
+      error("Template not found"); redirectTo("/components/template/index.html")
     }
 
 }

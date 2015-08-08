@@ -32,10 +32,10 @@ class ClusterRender extends PaginatorSnippet[Cluster] {
 
       <td>{u.clusterName.get}</td>
       <td>
-        {link("/cluster/edit", () => selectedCluster(Full(u)), Text("Edit"))}
+        {link("/components/cluster/edit", () => selectedCluster(Full(u)), Text("Edit"))}
       </td>
       <td>
-        {link("/cluster/delete", () => selectedCluster(Full(u)), Text("Delete"))}
+        {link("/components/cluster/delete", () => selectedCluster(Full(u)), Text("Delete"))}
       </td>
     </tr> )
 
@@ -49,7 +49,7 @@ class ClusterRender extends PaginatorSnippet[Cluster] {
         def deleteCluster() {
           notice("Cluster " + (cluster.clusterName ) + " deleted")
           cluster.delete_!
-          redirectTo("/cluster/index.html")
+          redirectTo("/components/cluster/index.html")
         }
 
         // bind the incoming XHTML to a "delete" button.
@@ -62,14 +62,14 @@ class ClusterRender extends PaginatorSnippet[Cluster] {
         // if the was no ID or the cluster couldn't be found,
         // display an error and redirect
       }) openOr {
-      error("Cluster not found"); redirectTo("/cluster/index.html")
+      error("Cluster not found"); redirectTo("/components/cluster/index.html")
     }
   }
   // called when the form is submitted
   private def saveCluster(cluster: Cluster) = cluster.validate match {
     // no validation errors, save the cluster, and go
     // back to the "list" page
-    case Nil => cluster.save; redirectTo("/cluster/index.html")
+    case Nil => cluster.save; redirectTo("/components/cluster/index.html")
 
     // oops... validation errors
     // display the errors and make sure our selected cluster is still the same
@@ -79,7 +79,7 @@ class ClusterRender extends PaginatorSnippet[Cluster] {
   def add(xhtml: Group): NodeSeq =
     selectedCluster.is.openOr(new Cluster).toForm(Empty, saveCluster _) ++ <tr>
       <td>
-        <a href="/cluster/index.html">Cancel</a>
+        <a href="/components/cluster/index.html">Cancel</a>
       </td>
       <td>
         <input type="submit" value="Create"/>
@@ -102,7 +102,7 @@ class ClusterRender extends PaginatorSnippet[Cluster] {
       // call.
       toForm(Empty, saveCluster _) ++ <tr>
       <td>
-        <a href="/cluster/index.html">Cancel</a>
+        <a href="/components/cluster/index.html">Cancel</a>
       </td>
       <td>
         <input type="submit" value="Save"/>
@@ -111,7 +111,7 @@ class ClusterRender extends PaginatorSnippet[Cluster] {
 
       // bail out if the ID is not supplied or the cluster's not found
     ) openOr {
-      error("Cluster not found"); redirectTo("/cluster/index.html")
+      error("Cluster not found"); redirectTo("/components/cluster/index.html")
     }
 
 }

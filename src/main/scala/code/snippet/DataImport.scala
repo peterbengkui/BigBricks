@@ -28,7 +28,7 @@ val message=
      case Full(x) => {
        val content = new String(x,"UTF-8")
          submitType match {
-         case "Project" => {
+         case "project" => {
            val projects =ScriptDBImport.extractProjects(content)
            s"Ready to upload ${projects.size} projects"
          }
@@ -53,7 +53,7 @@ val message=
     // with a function... behavior to perform when the
     // for element is submitted
    ("name=file_upload" #>  SHtml.fileUpload(ul=>  fileHolder=Full(ul) ) )& // set the name
-      "type=hidden" #> SHtml.onSubmit(submitType =_) &
+      "name=contentType" #> SHtml.onSubmit(submitType =_) &
       "type=submit" #> SHtml.onSubmitUnit(process)
   }
 }

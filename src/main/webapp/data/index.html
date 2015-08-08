@@ -5,11 +5,24 @@
         <div class="panel-heading">Upload projects</div>
         <div class="panel-body">
 
-        <form class="lift:DataImport?form=post&multipart=true">
-            <input type="file" name="file_upload">
-            <input type="hidden" value="Project">
-            <input type="submit" value="Upload File">
+        <form role="form"  data-list="lift:DataImport?form=post&multipart=true">
+
+            <div class="form-group">
+                <label class="control-label">Select File</label>
+                <input class="file" type="file" name="file_upload">
+            </div>
+            <div class="form-group">
+                <label for="contentType"> Content type </label>
+                <select class=".form-control" name="contentType">
+                    <option value="job">Job</option>
+                    <option value="project">Project</option>
+                    <option value="template">Template</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-default" value="Upload File">Submit</button>
+
         </form>
+
         </div>
         <div class="panel-heading">Upload jobs</div>
         <div class="panel-body">

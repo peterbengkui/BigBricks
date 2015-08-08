@@ -35,10 +35,10 @@ class ProjectRender extends PaginatorSnippet[Project] {
       <td>{u.projectName.get}</td>
       <td>{u.jarName.get}</td>
       <td>
-        {link("/project/edit", () => selectedProject(Full(u)), Text("Edit"))}
+        {link("/components/project/edit", () => selectedProject(Full(u)), Text("Edit"))}
       </td>
       <td>
-        {link("/project/delete", () => selectedProject(Full(u)), Text("Delete"))}
+        {link("/components/project/delete", () => selectedProject(Full(u)), Text("Delete"))}
       </td>
     </tr> )
 
@@ -52,7 +52,7 @@ class ProjectRender extends PaginatorSnippet[Project] {
         def deleteProject() {
           notice("Project " + (project.projectName + " " + project.gitBranch) + " deleted")
           project.delete_!
-          redirectTo("/project/index.html")
+          redirectTo("/components/project/index.html")
         }
 
         // bind the incoming XHTML to a "delete" button.
@@ -65,14 +65,14 @@ class ProjectRender extends PaginatorSnippet[Project] {
         // if the was no ID or the project couldn't be found,
         // display an error and redirect
       }) openOr {
-      error("Project not found"); redirectTo("/project/index.html")
+      error("Project not found"); redirectTo("/components/project/index.html")
     }
   }
   // called when the form is submitted
   private def saveProject(project: Project) = project.validate match {
     // no validation errors, save the project, and go
     // back to the "list" page
-    case Nil => project.save; redirectTo("/project/index.html")
+    case Nil => project.save; redirectTo("/components/project/index.html")
 
     // oops... validation errors
     // display the errors and make sure our selected project is still the same
@@ -82,7 +82,7 @@ class ProjectRender extends PaginatorSnippet[Project] {
   def add(xhtml: Group): NodeSeq =
     selectedProject.is.openOr(new Project).toForm(Empty, saveProject _) ++ <tr>
       <td>
-        <a href="/project/index.html">Cancel</a>
+        <a href="/components/project/index.html">Cancel</a>
       </td>
       <td>
         <input type="submit" value="Create"/>
@@ -105,7 +105,7 @@ class ProjectRender extends PaginatorSnippet[Project] {
       // call.
       toForm(Empty, saveProject _) ++ <tr>
       <td>
-        <a href="/project/index.html">Cancel</a>
+        <a href="/components/project/index.html">Cancel</a>
       </td>
       <td>
         <input type="submit" value="Save"/>
@@ -114,7 +114,7 @@ class ProjectRender extends PaginatorSnippet[Project] {
 
       // bail out if the ID is not supplied or the project's not found
     ) openOr {
-      error("Project not found"); redirectTo("/project/index.html")
+      error("Project not found"); redirectTo("/components/project/index.html")
     }
 
 }

@@ -47,10 +47,10 @@ class JobRender extends PaginatorSnippet[Job] {
       <td>{u.project.get}</td>
       <td>{u.template.get}</td>
       <td>
-        {link("/job/edit", () => selectedJob(Full(u)), Text("Edit"))}
+        {link("/components/job/edit", () => selectedJob(Full(u)), Text("Edit"))}
       </td>
       <td>
-        {link("/job/delete", () => selectedJob(Full(u)), Text("Delete"))}
+        {link("/components/job/delete", () => selectedJob(Full(u)), Text("Delete"))}
       </td>
     </tr> )
 
@@ -59,7 +59,7 @@ class JobRender extends PaginatorSnippet[Job] {
   private def saveJob(job: Job) = job.validate match {
     // no validation errors, save the job, and go
     // back to the "list" page
-    case Nil => job.save; redirectTo("/job/index.html")
+    case Nil => job.save; redirectTo("/components/job/index.html")
 
     // oops... validation errors
     // display the errors and make sure our selected job is still the same
@@ -69,7 +69,7 @@ class JobRender extends PaginatorSnippet[Job] {
   def add(xhtml: Group): NodeSeq =
     selectedJob.is.openOr(new Job).toForm(Empty, saveJob _) ++ <tr>
       <td>
-        <a href="/job/index.html">Cancel</a>
+        <a href="/components/job/index.html">Cancel</a>
       </td>
       <td>
         <input type="submit" value="Create"/>
@@ -92,7 +92,7 @@ class JobRender extends PaginatorSnippet[Job] {
       // call.
       toForm(Empty, saveJob _) ++ <tr>
       <td>
-        <a href="/job/index.html">Cancel</a>
+        <a href="/components/job/index.html">Cancel</a>
       </td>
       <td>
         <input type="submit" value="Save"/>
@@ -101,7 +101,7 @@ class JobRender extends PaginatorSnippet[Job] {
 
       // bail out if the ID is not supplied or the job's not found
     ) openOr {
-      error("Job not found"); redirectTo("/job/index.html")
+      error("Job not found"); redirectTo("/components/job/index.html")
     }
 
 }
