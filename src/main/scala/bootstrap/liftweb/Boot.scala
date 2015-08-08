@@ -135,7 +135,7 @@ class Boot {
       ,editTemplateMenu,addTemplateMenu,deleteTemplateMenu
       ,editClusterMenu,addClusterMenu,deleteClusterMenu,
 
-    dataMenu >>LocGroup("lg1"),
+    dataMenu >>LocGroup("lg2"),
         ddLabel1      >> LocGroup("topRight") >> PlaceHolder submenus (
 
             divider1  >> FoBo.TBLocInfo.Divider >> userMenu
