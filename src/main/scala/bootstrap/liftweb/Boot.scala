@@ -102,25 +102,25 @@ class Boot {
     val dataMenu    = (Menu.i("Data") / "data" / "index").rule(loggedIn)
 
 
-    val jobMenu    = (Menu.i("Jobs") / "job" / "index").rule(loggedIn)
-    val editJobMenu =  Menu.i("Edit Job") / "job" /"edit" >> Hidden
-    val addJobMenu =  Menu.i("Add Job") / "job" /"add" >> Hidden
-    val deleteJobMenu =  Menu.i("Delete Job") / "job" /"delete" >> Hidden
+    val jobMenu    = (Menu.i("Jobs") / "components"/"job" / "index").rule(loggedIn)
+    val editJobMenu =  Menu.i("Edit Job") / "components"/"job" /"edit" >> Hidden
+    val addJobMenu =  Menu.i("Add Job") / "components"/"job" /"add" >> Hidden
+    val deleteJobMenu =  Menu.i("Delete Job") / "components"/"job" /"delete" >> Hidden
 
-    val projectMenu    = (Menu.i("Projects") / "project" / "index").rule(loggedIn)
-    val editProjectMenu =  Menu.i("Edit Project") / "project" /"edit" >> Hidden
-    val addProjectMenu =  Menu.i("Add Project") / "project" /"add" >> Hidden
-    val deleteProjectMenu =  Menu.i("Delete Project") / "project" /"delete" >> Hidden
+    val projectMenu    = (Menu.i("Projects") / "components"/"project" / "index").rule(loggedIn)
+    val editProjectMenu =  Menu.i("Edit Project") / "components"/"project" /"edit" >> Hidden
+    val addProjectMenu =  Menu.i("Add Project") / "components"/"project" /"add" >> Hidden
+    val deleteProjectMenu =  Menu.i("Delete Project") / "components"/"project" /"delete" >> Hidden
 
-    val templateMenu    = (Menu.i("Templates") / "template" / "index").rule(loggedIn)
-    val editTemplateMenu =  Menu.i("Edit Template") / "template" /"edit" >> Hidden
-    val addTemplateMenu =  Menu.i("Add Template") / "template" /"add" >> Hidden
-    val deleteTemplateMenu =  Menu.i("Delete Template") / "template" /"delete" >> Hidden
+    val templateMenu    = (Menu.i("Templates") / "components"/"template" / "index").rule(loggedIn)
+    val editTemplateMenu =  Menu.i("Edit Template") / "components"/"template" /"edit" >> Hidden
+    val addTemplateMenu =  Menu.i("Add Template") / "components"/"template" /"add" >> Hidden
+    val deleteTemplateMenu =  Menu.i("Delete Template") / "components"/"template" /"delete" >> Hidden
 
-    val clusterMenu    = (Menu.i("Clusters") / "cluster" / "index").rule(loggedIn)
-    val editClusterMenu =  Menu.i("Edit Cluster") / "cluster" /"edit" >> Hidden
-    val addClusterMenu =  Menu.i("Add Cluster") / "cluster" /"add" >> Hidden
-    val deleteClusterMenu =  Menu.i("Delete Cluster") / "cluster" /"delete" >> Hidden
+    val clusterMenu    = (Menu.i("Clusters") / "components"/"cluster" / "index").rule(loggedIn)
+    val editClusterMenu =  Menu.i("Edit Cluster") / "components"/"cluster" /"edit" >> Hidden
+    val addClusterMenu =  Menu.i("Add Cluster") / "components"/"cluster" /"add" >> Hidden
+    val deleteClusterMenu =  Menu.i("Delete Cluster") / "components"/"cluster" /"delete" >> Hidden
 
 
 
