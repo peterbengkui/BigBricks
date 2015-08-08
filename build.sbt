@@ -1,8 +1,8 @@
-name := "Lift v2.6 Template Application with Bootstrap v3"
+name := "BigLegos"
 
 version := "0.0.5"
 
-organization := "net.liftweb"
+organization := "com.recipegrace"
 
 scalaVersion := "2.11.2"
 
@@ -11,6 +11,7 @@ resolvers ++= Seq("snapshots"     at "https://oss.sonatype.org/content/repositor
                   "releases"      at "https://oss.sonatype.org/content/repositories/releases"
                  )
 
+seq(webSettings :_*)
 
 unmanagedResourceDirectories in Test <+= (baseDirectory) { _ / "src/main/webapp" }
 
