@@ -56,7 +56,7 @@ class ClusterRender extends PaginatorSnippet[Cluster] {
         // when the delete button is pressed, call the "deleteCluster"
         // function (which is a closure and bound the "cluster" object
         // in the current content)
-        ".clustername" #> (cluster.clusterName.is ) &
+        ".clustername" #> (cluster.clusterName.get ) &
           ".delete" #> submit("Delete", deleteCluster _)
 
         // if the was no ID or the cluster couldn't be found,

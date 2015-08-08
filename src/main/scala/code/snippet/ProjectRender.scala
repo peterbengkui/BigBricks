@@ -59,7 +59,7 @@ class ProjectRender extends PaginatorSnippet[Project] {
         // when the delete button is pressed, call the "deleteProject"
         // function (which is a closure and bound the "project" object
         // in the current content)
-        ".projectname" #> (project.projectName.is + " " + project.gitBranch.is) &
+        ".projectname" #> (project.projectName.get + " " + project.gitBranch.get) &
           ".delete" #> submit("Delete", deleteProject _)
 
         // if the was no ID or the project couldn't be found,

@@ -56,7 +56,7 @@ class TemplateRender extends PaginatorSnippet[Template] {
         // when the delete button is pressed, call the "deleteTemplate"
         // function (which is a closure and bound the "template" object
         // in the current content)
-        ".templatename" #> (template.templateName.is ) &
+        ".templatename" #> (template.templateName.get ) &
           ".delete" #> submit("Delete", deleteTemplate _)
 
         // if the was no ID or the template couldn't be found,

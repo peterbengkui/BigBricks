@@ -8,7 +8,7 @@ import Helpers._
 import common._
 import http._
 import sitemap._
-import Loc._
+import net.liftweb.sitemap.Loc._
 import mapper._
 
 import code.model._
@@ -95,8 +95,13 @@ class Boot {
     import scala.xml._
     val divider1   = Menu("divider1") / "divider1"
     val ddLabel1   = Menu.i("UserDDLabel") / "ddlabel1"
+    val ddLabel2   = Menu.i("Components") / "ddlabel2"
     val home       = Menu.i("Home") / "index"
     val userMenu   = User.AddUserMenusHere
+
+    val dataMenu    = (Menu.i("Data") / "data" / "index").rule(loggedIn)
+
+
     val jobMenu    = (Menu.i("Jobs") / "job" / "index").rule(loggedIn)
     val editJobMenu =  Menu.i("Edit Job") / "job" /"edit" >> Hidden
     val addJobMenu =  Menu.i("Add Job") / "job" /"add" >> Hidden
@@ -117,12 +122,8 @@ class Boot {
     val addClusterMenu =  Menu.i("Add Cluster") / "cluster" /"add" >> Hidden
     val deleteClusterMenu =  Menu.i("Delete Cluster") / "cluster" /"delete" >> Hidden
 
-    val dataMenu    = (Menu.i("Data") / "data" / "index").rule(loggedIn)
-    /*val twbs  = Menu(Loc("twbs",
-         ExtLink("http://getbootstrap.com/"),
-         S.loc("Bootstrap3", Text("Bootstrap3")),
-         LocGroup("lg2"),
-         FoBo.TBLocInfo.LinkTargetBlank ))     */
+
+
 
 
     def sitemap = SiteMap(
@@ -133,14 +134,18 @@ class Boot {
       ,editProjectMenu,addProjectMenu,deleteProjectMenu
       ,editTemplateMenu,addTemplateMenu,deleteTemplateMenu
       ,editClusterMenu,addClusterMenu,deleteClusterMenu,
-      jobMenu >>LocGroup("lg1"),
-      projectMenu >>LocGroup("lg1"),
-     templateMenu >>LocGroup("lg1"),
-      clusterMenu >>LocGroup("lg1"),
+
     dataMenu >>LocGroup("lg1"),
         ddLabel1      >> LocGroup("topRight") >> PlaceHolder submenus (
+
             divider1  >> FoBo.TBLocInfo.Divider >> userMenu
-            )
+            ),
+      ddLabel2      >> LocGroup("topRight") >> PlaceHolder submenus (
+           projectMenu,
+           templateMenu,
+           clusterMenu,
+           jobMenu
+          )
     )
   }
   
