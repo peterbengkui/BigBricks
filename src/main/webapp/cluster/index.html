@@ -1,19 +1,19 @@
 
 
 <div id="main" data-lift="surround?with=default;at=content">
-    <a href='/template/add'>Create a template</a>
+    <a href='/cluster/add'>Create a cluster</a>
 
 
     <table  class='table-striped'
             id="example" width="100%">
         <thead>
-        <tr>					<th>Template name</th>
+        <tr>					<th>Cluster name</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
         </thead>
         <tbody>
-        <tr data-lift="lift:TemplateRender.templates">
+        <tr data-lift="lift:ClusterRender.clusters">
 
 
         </tr>
@@ -21,7 +21,7 @@
     </table>
 
 
-    <div data-lift="lift:TemplateRender.paginate">
+    <div data-lift="lift:ClusterRender.paginate">
         <nav:first></nav:first>
         |
         <nav:prev></nav:prev>

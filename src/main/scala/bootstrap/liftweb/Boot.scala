@@ -1,5 +1,6 @@
 package bootstrap.liftweb
 
+import code.model.Template
 import net.liftweb._
 import util._
 import Helpers._
@@ -10,7 +11,7 @@ import sitemap._
 import Loc._
 import mapper._
 
-import code.model.{Job, User, Project, Template}
+import code.model._
 import net.liftmodules.FoBo
 
 import scala.language.postfixOps
@@ -38,8 +39,9 @@ class Boot {
     // any ORM you want
     Schemifier.schemify(true, Schemifier.infoF _, User)
     Schemifier.schemify(true, Schemifier.infoF _, Project)
-    Schemifier.schemify(true, Schemifier.infoF _, Template)
+    Schemifier.schemify(true, Schemifier.infoF _, code.model.Template)
     Schemifier.schemify(true, Schemifier.infoF _, Job)
+    Schemifier.schemify(true, Schemifier.infoF _, Cluster)
 
     // where to search snippet
     LiftRules.addToPackages("code")
@@ -106,11 +108,16 @@ class Boot {
     val deleteProjectMenu =  Menu.i("Delete Project") / "project" /"delete" >> Hidden
 
     val templateMenu    = (Menu.i("Templates") / "template" / "index").rule(loggedIn)
-    val dataMenu    = (Menu.i("Data") / "data" / "index").rule(loggedIn)
     val editTemplateMenu =  Menu.i("Edit Template") / "template" /"edit" >> Hidden
     val addTemplateMenu =  Menu.i("Add Template") / "template" /"add" >> Hidden
     val deleteTemplateMenu =  Menu.i("Delete Template") / "template" /"delete" >> Hidden
 
+    val clusterMenu    = (Menu.i("Clusters") / "cluster" / "index").rule(loggedIn)
+    val editClusterMenu =  Menu.i("Edit Cluster") / "cluster" /"edit" >> Hidden
+    val addClusterMenu =  Menu.i("Add Cluster") / "cluster" /"add" >> Hidden
+    val deleteClusterMenu =  Menu.i("Delete Cluster") / "cluster" /"delete" >> Hidden
+
+    val dataMenu    = (Menu.i("Data") / "data" / "index").rule(loggedIn)
     /*val twbs  = Menu(Loc("twbs",
          ExtLink("http://getbootstrap.com/"),
          S.loc("Bootstrap3", Text("Bootstrap3")),
@@ -124,10 +131,12 @@ class Boot {
       home          >> LocGroup("lg1")
       ,editJobMenu,addJobMenu,deleteJobMenu
       ,editProjectMenu,addProjectMenu,deleteProjectMenu
-      ,editTemplateMenu,addTemplateMenu,deleteTemplateMenu,
+      ,editTemplateMenu,addTemplateMenu,deleteTemplateMenu
+      ,editClusterMenu,addClusterMenu,deleteClusterMenu,
       jobMenu >>LocGroup("lg1"),
       projectMenu >>LocGroup("lg1"),
      templateMenu >>LocGroup("lg1"),
+      clusterMenu >>LocGroup("lg1"),
     dataMenu >>LocGroup("lg1"),
         ddLabel1      >> LocGroup("topRight") >> PlaceHolder submenus (
             divider1  >> FoBo.TBLocInfo.Divider >> userMenu
