@@ -1,6 +1,14 @@
 <div id="main" data-lift="surround?with=default;at=content">
-    <form data-lift="ProjectRender.confirmDelete?form=post">
+    <form data-lift="ClusterRender.confirmDelete?form=post">
         Do you really want to delete <span class="project"></span>
-        <a href="/project/index">No</a><input class="delete">
+
+        <div class="span3">
+            <input class="delete">
+            <a href='/components/project/index.html' class="btn btn-default btn-sm">
+                Cancel
+            </a>
+        </div>
+
+
     </form>
 </div>

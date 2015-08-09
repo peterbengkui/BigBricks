@@ -1,36 +1,22 @@
-package code 
-package snippet
+package code.snippet
 
-import code.model.Job
-
-import scala.xml.{NodeSeq, Text, Group}
-import net.liftweb.util._
-
-import net.liftweb.common._
 import java.util.Date
+
 import code.lib._
-import Helpers._
-import _root_.net.liftweb._
+import code.model.Job
+import net.liftweb.common._
+import net.liftweb.http.S._
+import net.liftweb.http.SHtml._
+import net.liftweb.http._
+import net.liftweb.mapper.{MaxRows, StartAt}
+import net.liftweb.util.Helpers._
 
-
-import mapper.{Ascending, OrderBy}
-import http._
-import S._
-import SHtml._
-import util._
-
-import _root_.java.util.Locale
-import common._
-import net.liftweb.mapper.{StartAt, MaxRows}
+import scala.xml.{Group, NodeSeq, Text}
 
 class JobRender extends PaginatorSnippet[Job] {
   lazy val date: Box[Date] = DependencyFactory.inject[Date] // inject the date
 
   private object selectedJob extends RequestVar[Box[Job]](Empty)
-  // replace the contents of the element with id "time" with the date
-  def time = "#time *" #> date.map(_.toString)
-
-
 
   override def count: Long = Job.count()
 
@@ -38,22 +24,44 @@ class JobRender extends PaginatorSnippet[Job] {
 
   def jobs: NodeSeq = {
 
-    // the header
+
 
 
     // get and display each of the jobs
     page.flatMap(u => <tr>
 
-      <td>{u.project.get}</td>
-      <td>{u.template.get}</td>
+      <td>{u.mainClassName.get}</td>
       <td>
-        {link("/components/job/edit", () => selectedJob(Full(u)), Text("Edit"))}
-      </td>
-      <td>
-        {link("/components/job/delete", () => selectedJob(Full(u)), Text("Delete"))}
+        {link("/components/job/edit", () => selectedJob(Full(u)),  <span class="glyphicon glyphicon-edit"></span> )}
+        {link("/components/job/delete", () => selectedJob(Full(u)), <span class="glyphicon glyphicon-remove"></span> )}
       </td>
     </tr> )
 
+  }
+  /**
+   * Confirm deleting a user
+   */
+  def confirmDelete = {
+    (for (job <- selectedJob.is) // find the job
+      yield {
+        def deleteJob() {
+          notice("Job " + (job.mainClassName) + " deleted")
+          job.delete_!
+          redirectTo("/components/job/index.html")
+        }
+
+        // bind the incoming XHTML to a "delete" button.
+        // when the delete button is pressed, call the "deleteJob"
+        // function (which is a closure and bound the "job" object
+        // in the current content)
+        ".job" #> (job.mainClassName.get ) &
+          ".delete" #> submit("Delete", deleteJob _, "class"-> "btn btn-primary")
+
+        // if the was no ID or the job couldn't be found,
+        // display an error and redirect
+      }) openOr {
+      error("Job not found"); redirectTo("/components/job/index.html")
+    }
   }
   // called when the form is submitted
   private def saveJob(job: Job) = job.validate match {
@@ -67,14 +75,14 @@ class JobRender extends PaginatorSnippet[Job] {
   }
 
   def add(xhtml: Group): NodeSeq =
-    selectedJob.is.openOr(new Job).toForm(Empty, saveJob _) ++ <tr>
-      <td>
-        <a href="/components/job/index.html">Cancel</a>
-      </td>
-      <td>
-        <input type="submit" value="Create"/>
-      </td>
-    </tr>
+    selectedJob.is.openOr(new Job).toForm(Empty, saveJob _) ++ <div class="span3">
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-new" aria-hidden="true"></span> Create
+      </button>
+      <a href='/components/job/index.html' class="btn btn-default btn-sm">
+        Cancel
+      </a>
+    </div>
 
   /**
    * Edit a job
@@ -90,14 +98,15 @@ class JobRender extends PaginatorSnippet[Job] {
       // "job" and "saveJob" will be called.  The
       // form fields are bound to the model's fields by this
       // call.
-      toForm(Empty, saveJob _) ++ <tr>
-      <td>
-        <a href="/components/job/index.html">Cancel</a>
-      </td>
-      <td>
-        <input type="submit" value="Save"/>
-      </td>
-    </tr>
+      toForm(Empty, saveJob _) ++ <div class="span3">
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-new" aria-hidden="true"></span> Save
+      </button>
+      <a href='/components/job/index.html' class="btn btn-default btn-sm">
+        Cancel
+      </a>
+    </div>
+
 
       // bail out if the ID is not supplied or the job's not found
     ) openOr {

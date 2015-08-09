@@ -32,10 +32,8 @@ class TemplateRender extends PaginatorSnippet[Template] {
 
       <td>{u.templateName.get}</td>
       <td>
-        {link("/components/template/edit", () => selectedTemplate(Full(u)), Text("Edit"))}
-      </td>
-      <td>
-        {link("/components/template/delete", () => selectedTemplate(Full(u)), Text("Delete"))}
+        {link("/components/template/edit", () => selectedTemplate(Full(u)),  <span class="glyphicon glyphicon-edit"></span> )}
+        {link("/components/template/delete", () => selectedTemplate(Full(u)), <span class="glyphicon glyphicon-remove"></span> )}
       </td>
     </tr> )
 
@@ -56,8 +54,8 @@ class TemplateRender extends PaginatorSnippet[Template] {
         // when the delete button is pressed, call the "deleteTemplate"
         // function (which is a closure and bound the "template" object
         // in the current content)
-        ".templatename" #> (template.templateName.get ) &
-          ".delete" #> submit("Delete", deleteTemplate _)
+        ".template" #> (template.templateName.get ) &
+          ".delete" #> submit("Delete", deleteTemplate _, "class"-> "btn btn-primary")
 
         // if the was no ID or the template couldn't be found,
         // display an error and redirect
@@ -77,14 +75,14 @@ class TemplateRender extends PaginatorSnippet[Template] {
   }
 
   def add(xhtml: Group): NodeSeq =
-    selectedTemplate.is.openOr(new Template).toForm(Empty, saveTemplate _) ++ <tr>
-      <td>
-        <a href="/components/template/index.html">Cancel</a>
-      </td>
-      <td>
-        <input type="submit" value="Create"/>
-      </td>
-    </tr>
+    selectedTemplate.is.openOr(new Template).toForm(Empty, saveTemplate _) ++ <div class="span3">
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-new" aria-hidden="true"></span> Create
+      </button>
+      <a href='/components/template/index.html' class="btn btn-default btn-sm">
+        Cancel
+      </a>
+    </div>
 
   /**
    * Edit a template
@@ -100,14 +98,15 @@ class TemplateRender extends PaginatorSnippet[Template] {
       // "template" and "saveTemplate" will be called.  The
       // form fields are bound to the model's fields by this
       // call.
-      toForm(Empty, saveTemplate _) ++ <tr>
-      <td>
-        <a href="/components/template/index.html">Cancel</a>
-      </td>
-      <td>
-        <input type="submit" value="Save"/>
-      </td>
-    </tr>
+      toForm(Empty, saveTemplate _) ++ <div class="span3">
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-new" aria-hidden="true"></span> Create
+      </button>
+      <a href='/components/template/index.html' class="btn btn-default btn-sm">
+        Cancel
+      </a>
+    </div>
+
 
       // bail out if the ID is not supplied or the template's not found
     ) openOr {

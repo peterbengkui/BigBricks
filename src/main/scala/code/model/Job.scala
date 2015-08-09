@@ -1,7 +1,8 @@
 package code
 package model
 
-import net.liftweb.http.StringField
+
+import code.lib.BootstrapCodeGenerator._
 import net.liftweb.mapper._
 /**
  * The singleton that has methods for accessing the database
@@ -10,6 +11,8 @@ object Job extends Job with LongKeyedMetaMapper[Job] {
 
   override def fieldOrder = List(project,mainClassName,template)
   override def dbTableName = "jobs"
+  formatFormElement = bsformFormElement
+
 
 }
 /**

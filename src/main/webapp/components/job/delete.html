@@ -1,6 +1,14 @@
 <div id="main" data-lift="surround?with=default;at=content">
-    <form data-lift="JobRender.confirmDelete?form=post">
-        Do you really want to delete <span class="username"></span>
-        <a href="/job/index">No</a><input class="delete">
+    <form data-lift="ClusterRender.confirmDelete?form=post">
+        Do you really want to delete <span class="job"></span>
+
+        <div class="span3">
+            <input class="delete">
+            <a href='/components/job/index.html' class="btn btn-default btn-sm">
+                Cancel
+            </a>
+        </div>
+
+
     </form>
 </div>

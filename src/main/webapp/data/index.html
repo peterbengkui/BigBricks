@@ -2,24 +2,24 @@
 
 <div id="main" data-lift="surround?with=default;at=content">
     <div class="panel panel-default">
-        <div class="panel-heading">Upload projects</div>
+        <div class="panel-heading">Upload Components</div>
         <div class="panel-body">
 
         <form role="form"  data-list="lift:DataImport?form=post&multipart=true">
 
             <div class="form-group">
                 <label class="control-label">Select File</label>
-                <input class="file" type="file" name="file_upload">
+                <input class="form-control" type="file" name="file_upload">
             </div>
             <div class="form-group">
-                <label for="contentType"> Content type </label>
-                <select class=".form-control" name="contentType">
+                <label> Content type </label>
+                <select class="form-control" name="contentType">
                     <option value="job">Job</option>
                     <option value="project">Project</option>
                     <option value="template">Template</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-default" value="Upload File">Submit</button>
+            <button type="submit" class="btn btn-primary" value="Upload File">Submit</button>
 
         </form>
 

@@ -32,10 +32,8 @@ class ClusterRender extends PaginatorSnippet[Cluster] {
 
       <td>{u.clusterName.get}</td>
       <td>
-        {link("/components/cluster/edit", () => selectedCluster(Full(u)), Text("Edit"))}
-      </td>
-      <td>
-        {link("/components/cluster/delete", () => selectedCluster(Full(u)), Text("Delete"))}
+        {link("/components/cluster/edit", () => selectedCluster(Full(u)),  <span class="glyphicon glyphicon-edit"></span> )}
+        {link("/components/cluster/delete", () => selectedCluster(Full(u)), <span class="glyphicon glyphicon-remove"></span> )}
       </td>
     </tr> )
 
@@ -56,8 +54,8 @@ class ClusterRender extends PaginatorSnippet[Cluster] {
         // when the delete button is pressed, call the "deleteCluster"
         // function (which is a closure and bound the "cluster" object
         // in the current content)
-        ".clustername" #> (cluster.clusterName.get ) &
-          ".delete" #> submit("Delete", deleteCluster _)
+        ".cluster" #> (cluster.clusterName.get ) &
+          ".delete" #> submit("Delete", deleteCluster _, "class"-> "btn btn-primary")
 
         // if the was no ID or the cluster couldn't be found,
         // display an error and redirect
@@ -77,14 +75,14 @@ class ClusterRender extends PaginatorSnippet[Cluster] {
   }
 
   def add(xhtml: Group): NodeSeq =
-    selectedCluster.is.openOr(new Cluster).toForm(Empty, saveCluster _) ++ <tr>
-      <td>
-        <a href="/components/cluster/index.html">Cancel</a>
-      </td>
-      <td>
-        <input type="submit" value="Create"/>
-      </td>
-    </tr>
+    selectedCluster.is.openOr(new Cluster).toForm(Empty, saveCluster _) ++ <div class="span3">
+        <button type="submit" class="btn btn-primary">
+          <span class="glyphicon glyphicon-new" aria-hidden="true"></span> Create
+        </button>
+      <a href='/components/cluster/index.html' class="btn btn-default btn-sm">
+        Cancel
+      </a>
+    </div>
 
   /**
    * Edit a cluster
@@ -100,14 +98,15 @@ class ClusterRender extends PaginatorSnippet[Cluster] {
       // "cluster" and "saveCluster" will be called.  The
       // form fields are bound to the model's fields by this
       // call.
-      toForm(Empty, saveCluster _) ++ <tr>
-      <td>
-        <a href="/components/cluster/index.html">Cancel</a>
-      </td>
-      <td>
-        <input type="submit" value="Save"/>
-      </td>
-    </tr>
+      toForm(Empty, saveCluster _) ++ <div class="span3">
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-new" aria-hidden="true"></span> Save
+      </button>
+      <a href='/components/cluster/index.html' class="btn btn-default btn-sm">
+        Cancel
+      </a>
+    </div>
+
 
       // bail out if the ID is not supplied or the cluster's not found
     ) openOr {

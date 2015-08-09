@@ -2,7 +2,6 @@ package code.snippet
 
 import java.util.Date
 
-import _root_.net.liftweb._
 import code.lib._
 import code.model.Project
 import net.liftweb.common._
@@ -11,7 +10,6 @@ import net.liftweb.http.SHtml._
 import net.liftweb.http._
 import net.liftweb.mapper.{MaxRows, StartAt}
 import net.liftweb.util.Helpers._
-import net.liftweb.util._
 
 import scala.xml.{Group, NodeSeq, Text}
 
@@ -33,12 +31,9 @@ class ProjectRender extends PaginatorSnippet[Project] {
     page.flatMap(u => <tr>
 
       <td>{u.projectName.get}</td>
-      <td>{u.jarName.get}</td>
       <td>
-        {link("/components/project/edit", () => selectedProject(Full(u)), Text("Edit"))}
-      </td>
-      <td>
-        {link("/components/project/delete", () => selectedProject(Full(u)), Text("Delete"))}
+        {link("/components/project/edit", () => selectedProject(Full(u)),  <span class="glyphicon glyphicon-edit"></span> )}
+        {link("/components/project/delete", () => selectedProject(Full(u)), <span class="glyphicon glyphicon-remove"></span> )}
       </td>
     </tr> )
 
@@ -50,7 +45,7 @@ class ProjectRender extends PaginatorSnippet[Project] {
     (for (project <- selectedProject.is) // find the project
       yield {
         def deleteProject() {
-          notice("Project " + (project.projectName + " " + project.gitBranch) + " deleted")
+          notice("Project " + (project.projectName ) + " deleted")
           project.delete_!
           redirectTo("/components/project/index.html")
         }
@@ -59,8 +54,8 @@ class ProjectRender extends PaginatorSnippet[Project] {
         // when the delete button is pressed, call the "deleteProject"
         // function (which is a closure and bound the "project" object
         // in the current content)
-        ".projectname" #> (project.projectName.get + " " + project.gitBranch.get) &
-          ".delete" #> submit("Delete", deleteProject _)
+        ".project" #> (project.projectName.get ) &
+          ".delete" #> submit("Delete", deleteProject _, "class"-> "btn btn-primary")
 
         // if the was no ID or the project couldn't be found,
         // display an error and redirect
@@ -80,14 +75,14 @@ class ProjectRender extends PaginatorSnippet[Project] {
   }
 
   def add(xhtml: Group): NodeSeq =
-    selectedProject.is.openOr(new Project).toForm(Empty, saveProject _) ++ <tr>
-      <td>
-        <a href="/components/project/index.html">Cancel</a>
-      </td>
-      <td>
-        <input type="submit" value="Create"/>
-      </td>
-    </tr>
+    selectedProject.is.openOr(new Project).toForm(Empty, saveProject _) ++ <div class="span3">
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-new" aria-hidden="true"></span> Create
+      </button>
+      <a href='/components/project/index.html' class="btn btn-default btn-sm">
+        Cancel
+      </a>
+    </div>
 
   /**
    * Edit a project
@@ -103,14 +98,15 @@ class ProjectRender extends PaginatorSnippet[Project] {
       // "project" and "saveProject" will be called.  The
       // form fields are bound to the model's fields by this
       // call.
-      toForm(Empty, saveProject _) ++ <tr>
-      <td>
-        <a href="/components/project/index.html">Cancel</a>
-      </td>
-      <td>
-        <input type="submit" value="Save"/>
-      </td>
-    </tr>
+      toForm(Empty, saveProject _) ++ <div class="span3">
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-new" aria-hidden="true"></span> Save
+      </button>
+      <a href='/components/project/index.html' class="btn btn-default btn-sm">
+        Cancel
+      </a>
+    </div>
+
 
       // bail out if the ID is not supplied or the project's not found
     ) openOr {
