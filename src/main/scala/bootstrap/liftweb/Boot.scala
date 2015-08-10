@@ -1,6 +1,5 @@
 package bootstrap.liftweb
 
-import code.model.Template
 import net.liftweb._
 import util._
 import Helpers._
@@ -13,6 +12,7 @@ import mapper._
 
 import code.model._
 import net.liftmodules.FoBo
+
 
 import scala.language.postfixOps
 
@@ -81,7 +81,8 @@ class Boot {
           case _ => Empty
         }
      }
-    ) 
+    )
+
     
     // Make a transaction span the whole HTTP request
     S.addAround(DB.buildLoanWrapper)

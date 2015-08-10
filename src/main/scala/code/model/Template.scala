@@ -18,12 +18,10 @@ object Template extends Template with LongKeyedMetaMapper[Template] {
   override def dbTableName = "templates"
   formatFormElement = bsformFormElement
 }
-/**
- * An O-R mapped "User" class that includes first name, last name, password and we add a "Personal Essay" to it
- */
+
 class Template extends LongKeyedMapper[Template]  with IdPK {
   def getSingleton = Template // what's the "meta" server
-  object templateName extends MappedString(this, 25){
+  object templateName extends MappedString(this, 50){
 
     override def displayName = "Template name"
     override def toForm = addClassAttribute(super.toForm)

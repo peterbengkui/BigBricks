@@ -100,7 +100,7 @@ class ProjectRender extends PaginatorSnippet[Project] {
       // call.
       toForm(Empty, saveProject _) ++ <div class="span3">
       <button type="submit" class="btn btn-primary">
-        <span class="glyphicon glyphicon-new" aria-hidden="true"></span> Save
+        <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save
       </button>
       <a href='/components/project/index.html' class="btn btn-default btn-sm">
         Cancel

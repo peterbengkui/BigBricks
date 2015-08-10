@@ -20,21 +20,21 @@ object Project extends Project with LongKeyedMetaMapper[Project] {
  */
 class Project extends LongKeyedMapper[Project]  with IdPK {
   def getSingleton = Project // what's the "meta" server
-  object projectName extends MappedString(this, 25){
+  object projectName extends MappedString(this, 50){
 
     override def displayName = "Project name"
     override def toForm = addClassAttribute(super.toForm)
 
 
   }
-  object projectLocation extends MappedString(this, 50){
+  object projectLocation extends MappedString(this, 100){
 
     override def displayName = "Project location"
     override def toForm = addClassAttribute(super.toForm)
 
 
   }
-  object jarName extends MappedString(this, 50){
+  object jarName extends MappedString(this, 100){
 
     override def displayName = "Jar name"
     override def toForm = addClassAttribute(super.toForm)

@@ -6,6 +6,7 @@ import net.liftweb.json._
  * Created by fjacob on 8/2/15.
  */
 object ScriptDBImport {
+
   implicit val formats = DefaultFormats
   def get(json:JValue, nodes:String*) = {
     nodes.map(f=> (json \ f).values)
@@ -38,7 +39,10 @@ object ScriptDBImport {
       yield getTemplate(template)
   }
   def extractProjects(projectsText: String): List[ScriptDBProject] = {
+
     for (project <- parse(projectsText).asInstanceOf[JArray].children)
       yield getProject(project)
+
+
   }
 }

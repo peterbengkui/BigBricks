@@ -22,7 +22,13 @@ object BootstrapCodeGenerator {
       case Full(x:Elem) => {
         Full({x  % Attribute(None, "class", Text("form-control"), Null)})
       }
-      case _=>Empty
+      case Full(x:NodeSeq)=>{
+      Full(<span>  {x.map(f=> f.asInstanceOf[Elem]  % Attribute(None, "class", Text("form-control"), Null))}</span>)
+      }
+      case _=>{
+
+        Empty
+      }
     }
   }
   def addPasswordConfirm(input:Box[NodeSeq]) = {
