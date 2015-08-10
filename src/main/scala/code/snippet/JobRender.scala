@@ -8,9 +8,10 @@ import net.liftweb.common._
 import net.liftweb.http.S._
 import net.liftweb.http.SHtml._
 import net.liftweb.http._
+import net.liftweb.json.Printer
 import net.liftweb.mapper.{MaxRows, StartAt}
 import net.liftweb.util.Helpers._
-
+import net.liftweb.json._
 import scala.xml.{Group, NodeSeq, Text}
 
 class JobRender extends PaginatorSnippet[Job] {
@@ -67,7 +68,15 @@ class JobRender extends PaginatorSnippet[Job] {
   private def saveJob(job: Job) = job.validate match {
     // no validation errors, save the job, and go
     // back to the "list" page
-    case Nil => job.save; redirectTo("/components/job/index.html")
+    case Nil => {
+
+      val argsText=Printer.pretty(net.liftweb.json.render(net.liftweb.json.parse(job.arguments.get.toString)))
+
+      job
+        .arguments(argsText)
+        .save
+      redirectTo("/components/job/index.html")
+    }
 
     // oops... validation errors
     // display the errors and make sure our selected job is still the same

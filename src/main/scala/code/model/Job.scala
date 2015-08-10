@@ -3,7 +3,10 @@ package model
 
 
 import code.lib.BootstrapCodeGenerator._
+import code.snippet.DataImport.Argument
+import net.liftweb.json.DefaultFormats
 import net.liftweb.mapper._
+import net.liftweb.util.FieldError
 import scala.xml.Text
 import net.liftweb.common.{Box, Full}
 /**
@@ -51,10 +54,32 @@ class Job extends LongKeyedMapper[Job]  with IdPK {
   object arguments extends MappedTextarea(this, 2048) {
     override def textareaRows  = 10
     override def textareaCols = 100
-    override def displayName = "Template"
+    override def displayName = "Arguments"
+    implicit val formats = DefaultFormats
     import net.liftweb.json._
-    override def get = Printer.pretty(render(net.liftweb.json.parse(super.get)))
+
     override def toForm = addClassAttribute(super.toForm)
+    override def validations =  validJSON _ :: super.validations
+
+
+    def validJSON(argText : String) = {
+
+      try {
+        val arguments=
+
+        for (project <- parse(argText).asInstanceOf[JArray].children)
+          yield project.extract[Argument]
+
+        println(arguments)
+        List[FieldError]()
+      } catch {
+        case _:Throwable => List(FieldError(this, "Invalid json"))
+      }
+
+
+
+
+    }
 
   }
 }
