@@ -8,23 +8,70 @@ import net.liftweb.common._
 import net.liftweb.http.S._
 import net.liftweb.http.SHtml._
 import net.liftweb.http._
-import net.liftweb.json.Printer
-import net.liftweb.mapper.{MaxRows, StartAt}
-import net.liftweb.util.Helpers._
-import net.liftweb.json._
-import scala.xml.{Group, NodeSeq, Text}
 
-class JobRender extends PaginatorSnippet[Job] {
+
+import net.liftweb.json.Printer
+import net.liftweb.mapper.{MaxRows, StartAt, By, ByList}
+import net.liftweb.util.Helpers._
+import code.model.Project
+import scala.xml.{Group, NodeSeq, Text}
+import net.liftweb.http.js.JsCmds._
+import net.liftweb.http.js.JsCmd
+
+object SelectedProject {
+  object selectedProjectName extends SessionVar[String]("")
+
+}
+
+import SelectedProject._
+class JobRender extends  PaginatorSnippet[Job] {
+
+
+  val projects =  {
+    Project.findAll().map(f=> f.projectName.get).map(s=> (s,s))
+  }
+  def getProjects(name:String):List[Long] = {
+
+     name match {
+       case "" => List()
+       case x:String =>{
+         val projectIds= Project.findAll(By(Project.projectName,x )).map(f=> f.id.get)
+         projectIds
+       }
+       case _ => List()
+
+     }
+
+  }
   lazy val date: Box[Date] = DependencyFactory.inject[Date] // inject the date
 
+
   private object selectedJob extends RequestVar[Box[Job]](Empty)
+  var projectName =selectedProjectName.get
 
-  override def count: Long = Job.count()
+  override def count: Long = Job.findAll(
+    ByList(Job.project, getProjects(projectName))).size
 
-  override def page: Seq[Job] =  Job.findAll(StartAt(curPage*itemsPerPage), MaxRows(itemsPerPage))
+
+  override def page: Seq[Job] =  Job.findAll(
+    ByList(Job.project, getProjects(projectName)),
+    StartAt(curPage*itemsPerPage), MaxRows(itemsPerPage))
+
+  private def replace(collection: String): JsCmd = {
+    selectedProjectName.set(collection)
+    RedirectTo("index.html", () => {
+      S.notice(" Project changed to: " + selectedProjectName.get)
+    })
+
+  }
+
+  def selectProject = {
+    "#project" #> ajaxSelect(projects, Full(projectName), { s =>
+      replace(s)}, "class" -> "form-control input-sm")
+  }
+
 
   def jobs: NodeSeq = {
-
 
 
 

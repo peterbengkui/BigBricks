@@ -5,23 +5,38 @@
         <span class="glyphicon glyphicon-plus"></span> New Job
     </a>
 
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div data-lift="JobRender.selectProject?form=post">
+                <label> Project</label> <select id="project"></select>
 
 
-    <table  class='table-striped'
-            id="example" width="100%">
-        <thead>
-        <tr>					<th>Main class</th>
-
-            <th> <span class="glyphicon glyphicon-wrench"></span></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr data-lift="lift:JobRender.jobs">
+            </div>
 
 
-        </tr>
-        </tbody>
-    </table>
+        </div>
+        <div class="panel-body">
+            <table  class='table-striped'
+                    id="example" width="100%">
+                <thead>
+                <tr>					<th>Main class</th>
+
+                    <th> <span class="glyphicon glyphicon-wrench"></span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-lift="lift:JobRender.jobs">
+
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
 
 
     <div data-lift="lift:JobRender.paginate">
