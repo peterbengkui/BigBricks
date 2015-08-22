@@ -1,11 +1,8 @@
 package com.recipegrace.bigbricks.db
 
-import java.sql.ResultSet
-
-import code.model.{Project, Job}
-import com.recipegrace.bigbricks.data.BigBricksImport._
 import com.recipegrace.bigbricks.data.BigBricksExport._
-import net.liftweb.db.{H2Driver, StandardDBVendor}
+import com.recipegrace.bigbricks.data.BigBricksImport._
+import net.liftweb.db.StandardDBVendor
 import net.liftweb.mapper.DB
 import net.liftweb.util
 import net.liftweb.util.Props

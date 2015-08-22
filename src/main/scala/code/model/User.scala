@@ -1,13 +1,10 @@
 package code
 package model
 
-import net.liftweb.mapper._
-import net.liftweb.util._
-import net.liftweb.common._
-import net.liftweb.sitemap.Loc._
-import net.liftweb.http._
-import net.liftweb.http.SHtml._
 import net.liftmodules.FoBoBs.mapper._
+import net.liftweb.common._
+import net.liftweb.mapper._
+import net.liftweb.sitemap.Loc._
 
 /**
  * The singleton that has methods for accessing the database

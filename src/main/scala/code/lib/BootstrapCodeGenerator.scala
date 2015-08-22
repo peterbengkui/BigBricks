@@ -1,8 +1,8 @@
 package code.lib
 
-import net.liftweb.common.{Empty, Full,Box}
+import net.liftweb.common.{Box, Empty, Full}
 
-import scala.xml.{Null, Text, Attribute, NodeSeq,Elem}
+import scala.xml.{Attribute, Elem, NodeSeq, Null, Text}
 
 
 /**

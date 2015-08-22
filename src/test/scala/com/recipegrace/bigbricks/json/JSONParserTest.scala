@@ -2,7 +2,6 @@ package com.recipegrace.bigbricks.json
 
 import com.recipegrace.bigbricks.data.ScriptDBImport._
 import org.specs2.mutable.Specification
-import net.liftweb.json._
 
 /**
  * Created by fjacob on 8/2/15.

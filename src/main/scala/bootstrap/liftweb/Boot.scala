@@ -1,18 +1,15 @@
 package bootstrap.liftweb
 
-import net.liftweb._
-import util._
-import Helpers._
-
-import common._
-import http._
-import sitemap._
-import net.liftweb.sitemap.Loc._
-import mapper._
-
 import code.model._
 import net.liftmodules.FoBo
-
+import net.liftweb._
+import net.liftweb.common._
+import net.liftweb.http._
+import net.liftweb.mapper._
+import net.liftweb.sitemap.Loc._
+import net.liftweb.sitemap._
+import net.liftweb.util.Helpers._
+import net.liftweb.util._
 
 import scala.language.postfixOps
 
@@ -93,8 +90,6 @@ class Boot {
 
     val loggedIn = If(() => User.loggedIn_?,
       () => RedirectResponse("/user_mgt/login"))
-
-    import scala.xml._
     val divider1   = Menu("divider1") / "divider1"
     val ddLabel1   = Menu.i("UserDDLabel") / "ddlabel1"
     val ddLabel2   = Menu.i("Components") / "ddlabel2"

@@ -1,15 +1,15 @@
 package code
 package snippet
 
-import code.model.{Cluster, Job, Project, Template, User}
-import com.recipegrace.bigbricks.data.{BigBricksImport, ScriptDBImport}
+import code.model.{Job, Project, Template}
 import com.recipegrace.bigbricks.data.ScriptDBImport._
-import net.liftweb.json.Serialization._
+import com.recipegrace.bigbricks.data.{BigBricksImport, ScriptDBImport}
+import net.liftweb.common.{Box, Empty, Full}
 import net.liftweb.http._
-import net.liftweb.common.{Box,Empty,Full}
-import net.liftweb.util.Helpers._
-import net.liftweb.mapper.By
+import net.liftweb.json.Serialization._
 import net.liftweb.json._
+import net.liftweb.mapper.By
+import net.liftweb.util.Helpers._
 /**
  * A snippet that binds behavior, functions,
  * to HTML elements

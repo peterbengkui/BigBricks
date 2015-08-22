@@ -11,7 +11,7 @@ import net.liftweb.http._
 import net.liftweb.mapper.{MaxRows, StartAt}
 import net.liftweb.util.Helpers._
 
-import scala.xml.{Group, NodeSeq, Text}
+import scala.xml.{Group, NodeSeq}
 
 class TemplateRender extends PaginatorSnippet[Template] {
   lazy val date: Box[Date] = DependencyFactory.inject[Date] // inject the date
