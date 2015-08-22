@@ -1,10 +1,7 @@
 package code.model
 
 import code.lib.BootstrapCodeGenerator._
-import net.liftweb.common.{Empty, Full}
 import net.liftweb.mapper._
-
-import scala.xml.{Null, Text, Attribute}
 
 /**
  * The singleton that has methods for accessing the database

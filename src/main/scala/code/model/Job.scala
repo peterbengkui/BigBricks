@@ -4,11 +4,12 @@ package model
 
 import code.lib.BootstrapCodeGenerator._
 import code.snippet.DataImport.Argument
+import net.liftweb.common.{Box, Full}
 import net.liftweb.json.DefaultFormats
 import net.liftweb.mapper._
 import net.liftweb.util.FieldError
+
 import scala.xml.Text
-import net.liftweb.common.{Box, Full}
 /**
  * The singleton that has methods for accessing the database
  */

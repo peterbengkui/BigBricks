@@ -2,10 +2,8 @@ package code
 package lib
 
 import net.liftweb._
-import http._
-import util._
-import common._
-import java.util.Date
+import net.liftweb.http._
+import net.liftweb.util._
 
 /**
  * A factory for generating new instances of Date.  You can create

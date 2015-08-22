@@ -3,20 +3,18 @@ package code.snippet
 import java.util.Date
 
 import code.lib._
-import code.model.Job
+import code.model.{Job, Project}
 import net.liftweb.common._
 import net.liftweb.http.S._
 import net.liftweb.http.SHtml._
 import net.liftweb.http._
-
-
-import net.liftweb.json.Printer
-import net.liftweb.mapper.{MaxRows, StartAt, By, ByList}
-import net.liftweb.util.Helpers._
-import code.model.Project
-import scala.xml.{Group, NodeSeq, Text}
-import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js.JsCmd
+import net.liftweb.http.js.JsCmds._
+import net.liftweb.json.Printer
+import net.liftweb.mapper.{By, ByList, MaxRows, StartAt}
+import net.liftweb.util.Helpers._
+
+import scala.xml.{Group, NodeSeq}
 
 object SelectedProject {
 
@@ -28,7 +26,7 @@ object SelectedProject {
 
 }
 
-import SelectedProject._
+import code.snippet.SelectedProject._
 class JobRender extends  PaginatorSnippet[Job] {
 
 

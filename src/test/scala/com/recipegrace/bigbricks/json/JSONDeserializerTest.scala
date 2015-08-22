@@ -1,11 +1,9 @@
-package com.recipegrace.biglegos.json
+package com.recipegrace.bigbricks.json
 
-import code.model.{Project, Job}
-import net.liftweb.json.DefaultFormats
-import net.liftweb.json._
-import org.specs2.mutable.Specification
-import net.liftweb.json.JsonDSL._
+import code.model.Project
 import net.liftweb.json.Extraction._
+import net.liftweb.json.{DefaultFormats, _}
+import org.specs2.mutable.Specification
 /**
  * Created by fjacob on 8/16/15.
  */

@@ -1,9 +1,9 @@
-package com.recipegrace.biglegos.data
+package com.recipegrace.bigbricks.data
 
 import code.model._
 import net.liftweb.common.Logger
-import net.liftweb.mapper.By
 import net.liftweb.json._
+import net.liftweb.mapper.By
 /**
  * Created by fjacob on 8/16/15.
  */

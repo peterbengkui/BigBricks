@@ -1,18 +1,15 @@
 package bootstrap.liftweb
 
-import net.liftweb._
-import util._
-import Helpers._
-
-import common._
-import http._
-import sitemap._
-import net.liftweb.sitemap.Loc._
-import mapper._
-
 import code.model._
 import net.liftmodules.FoBo
-
+import net.liftweb._
+import net.liftweb.common._
+import net.liftweb.http._
+import net.liftweb.mapper._
+import net.liftweb.sitemap.Loc._
+import net.liftweb.sitemap._
+import net.liftweb.util.Helpers._
+import net.liftweb.util._
 
 import scala.language.postfixOps
 
@@ -23,9 +20,9 @@ import scala.language.postfixOps
 class Boot {
   def boot {
     if (!DB.jndiJdbcConnAvailable_?) {
-      val vendor = 
+      val vendor =
 	new StandardDBVendor(Props.get("db.driver") openOr "org.h2.Driver",
-			     Props.get("db.url") openOr 
+			     Props.get("db.url") openOr
 			     "jdbc:h2:lift_proto.db;AUTO_SERVER=TRUE",
 			     Props.get("db.user"), Props.get("db.password"))
 
@@ -54,14 +51,14 @@ class Boot {
 
     //Init the FoBo - Front-End Toolkit module, 
     //see http://liftweb.net/lift_modules for more info
-    FoBo.InitParam.JQuery=FoBo.JQuery1102  
-    FoBo.InitParam.ToolKit=FoBo.Bootstrap320 
-    FoBo.init() 
-    
+    FoBo.InitParam.JQuery=FoBo.JQuery1102
+    FoBo.InitParam.ToolKit=FoBo.Bootstrap320
+    FoBo.init()
+
     //Show the spinny image when an Ajax call starts
     LiftRules.ajaxStart =
       Full(() => LiftRules.jsArtifacts.show("ajax-loader").cmd)
-    
+
     // Make the spinny image go away when it ends
     LiftRules.ajaxEnd =
       Full(() => LiftRules.jsArtifacts.hide("ajax-loader").cmd)
@@ -75,7 +72,7 @@ class Boot {
     // Use HTML5 for rendering
     LiftRules.htmlProperties.default.set((r: Req) =>
       new Html5Properties(r.userAgent))
-      
+
     LiftRules.noticesAutoFadeOut.default.set( (notices: NoticeType.Value) => {
         notices match {
           case NoticeType.Notice => Full((8 seconds, 4 seconds))
@@ -84,17 +81,15 @@ class Boot {
      }
     )
 
-    
+
     // Make a transaction span the whole HTTP request
     S.addAround(DB.buildLoanWrapper)
   }
-  
+
   object Site {
 
     val loggedIn = If(() => User.loggedIn_?,
       () => RedirectResponse("/user_mgt/login"))
-
-    import scala.xml._
     val divider1   = Menu("divider1") / "divider1"
     val ddLabel1   = Menu.i("UserDDLabel") / "ddlabel1"
     val ddLabel2   = Menu.i("Components") / "ddlabel2"
@@ -150,5 +145,5 @@ class Boot {
           )
     )
   }
-  
+
 }
