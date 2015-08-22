@@ -1,4 +1,4 @@
-name := "BigLegos"
+name := "BigBricks"
 
 version := "0.0.5"
 
