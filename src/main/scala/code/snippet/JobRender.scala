@@ -19,7 +19,12 @@ import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js.JsCmd
 
 object SelectedProject {
-  object selectedProjectName extends SessionVar[String]("")
+
+  val initProject =  {
+    val projects =Project.findAll().map(f=> f.projectName.get)
+    if(projects.isEmpty)"" else projects.head
+  }
+  object selectedProjectName extends SessionVar[String](initProject)
 
 }
 

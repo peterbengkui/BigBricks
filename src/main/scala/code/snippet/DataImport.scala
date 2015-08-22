@@ -1,8 +1,8 @@
 package code
 package snippet
 
-import code.model.{Job, Project, Template}
-import com.recipegrace.biglegos.data.ScriptDBImport
+import code.model.{Cluster, Job, Project, Template, User}
+import com.recipegrace.biglegos.data.{BigBricksImport, ScriptDBImport}
 import com.recipegrace.biglegos.data.ScriptDBImport.ScriptDBJob
 import net.liftweb.json.Serialization._
 import net.liftweb.http._
@@ -100,6 +100,13 @@ val message=
 
 
          }
+         case "bigbricks" => {
+
+           BigBricksImport.importBigBricks(content)
+           s"uploaded bigbricks data"
+         }
+
+
          case _ =>{
            "Invalid type"
          }

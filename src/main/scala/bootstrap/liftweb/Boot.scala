@@ -32,6 +32,7 @@ class Boot {
       LiftRules.unloadHooks.append(vendor.closeAllConnections_! _)
 
       DB.defineConnectionManager(util.DefaultConnectionIdentifier, vendor)
+
     }
 
     // Use Lift's Mapper ORM to populate the database
@@ -100,7 +101,7 @@ class Boot {
     val home       = Menu.i("Home") / "index"
     val userMenu   = User.AddUserMenusHere
 
-    val dataMenu    = (Menu.i("Data") / "data" / "index").rule(loggedIn)
+    val dataMenu    = Menu.i("Data") / "data" / "index"
 
 
     val jobMenu    = (Menu.i("Jobs") / "components"/"job" / "index").rule(loggedIn)

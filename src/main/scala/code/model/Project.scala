@@ -11,6 +11,7 @@ import scala.xml.{Null, Text, Attribute}
  */
 object Project extends Project with LongKeyedMetaMapper[Project] {
 
+
   override def fieldOrder = List(projectName, projectLocation,jarName,gitBranch)
   override def dbTableName = "projects"
   formatFormElement = bsformFormElement
