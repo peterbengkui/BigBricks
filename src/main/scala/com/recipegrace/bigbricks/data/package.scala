@@ -1,4 +1,4 @@
-package com.recipegrace.biglegos
+package com.recipegrace.bigbricks
 
 /**
  * Created by fjacob on 8/22/15.

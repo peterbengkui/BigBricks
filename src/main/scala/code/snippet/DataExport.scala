@@ -1,6 +1,6 @@
 package code.snippet
 
-import com.recipegrace.biglegos.data.BigBricksExport
+import com.recipegrace.bigbricks.data.BigBricksExport
 import net.liftweb.http._
 import net.liftweb.util.Helpers._
 /**

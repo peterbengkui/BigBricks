@@ -1,4 +1,4 @@
-package com.recipegrace.biglegos.json
+package com.recipegrace.bigbricks.json
 
 import code.model.{Project, Job}
 import net.liftweb.json.DefaultFormats

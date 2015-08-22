@@ -1,4 +1,4 @@
-package com.recipegrace.biglegos.data
+package com.recipegrace.bigbricks.data
 
 import code.model.{Job, Template, Project, Cluster,User}
 import net.liftweb.json.Serialization._

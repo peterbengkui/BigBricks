@@ -2,8 +2,8 @@ package code
 package snippet
 
 import code.model.{Cluster, Job, Project, Template, User}
-import com.recipegrace.biglegos.data.{BigBricksImport, ScriptDBImport}
-import com.recipegrace.biglegos.data.ScriptDBImport.ScriptDBJob
+import com.recipegrace.bigbricks.data.{BigBricksImport, ScriptDBImport}
+import com.recipegrace.bigbricks.data.ScriptDBImport._
 import net.liftweb.json.Serialization._
 import net.liftweb.http._
 import net.liftweb.common.{Box,Empty,Full}

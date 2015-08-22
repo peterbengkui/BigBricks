@@ -1,10 +1,10 @@
-package com.recipegrace.biglegos.db
+package com.recipegrace.bigbricks.db
 
 import java.sql.ResultSet
 
 import code.model.{Project, Job}
-import com.recipegrace.biglegos.data.BigBricksExport._
-import com.recipegrace.biglegos.data.BigBricksImport._
+import com.recipegrace.bigbricks.data.BigBricksImport._
+import com.recipegrace.bigbricks.data.BigBricksExport._
 import net.liftweb.db.{H2Driver, StandardDBVendor}
 import net.liftweb.mapper.DB
 import net.liftweb.util
@@ -14,7 +14,6 @@ import org.specs2.mutable.Specification
 /**
  * Created by fjacob on 8/21/15.
  */
-import net.liftweb.json.Serialization._
 class DBExportTest extends Specification {
 
 
