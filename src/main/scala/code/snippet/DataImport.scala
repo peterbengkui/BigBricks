@@ -37,7 +37,7 @@ object DataImport {
         .mainClassName(job.mainClassName)
         .arguments(createArguments(job))
         .save
-   
+
 
   }
 
